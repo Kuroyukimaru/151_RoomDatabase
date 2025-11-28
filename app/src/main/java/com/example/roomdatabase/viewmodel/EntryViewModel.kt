@@ -29,4 +29,12 @@ class EntryViewModel(private val repositoriSiswa: RepositoriSiswa) : ViewModel()
         }
     }
 
-    
+    fun saveSiswa() {
+        if (validasiInput(uiStateSiswa.detailSiswa)) {
+            CoroutineScope(Dispatchers.IO).launch {
+                repositoriSiswa.insertSiswa(uiStateSiswa.detailSiswa.toSiswa())
+            }
+        }
+    }
+}
+
