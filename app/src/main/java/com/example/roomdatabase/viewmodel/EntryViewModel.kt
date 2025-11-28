@@ -1,39 +1,33 @@
 package com.example.roomdatabase.viewmodel
 
-
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.example.roomdatabase.repositori.RepositoriSiswa
 import com.example.roomdatabase.room.Siswa
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
-class EntryViewModel(private val repositoriSiswa: RepositoriSiswa) : ViewModel() {
-
+class EntryViewModel( private val repositoriSiswa: RepositoriSiswa) : ViewModel()
+{
     var uiStateSiswa by mutableStateOf(UIStateSiswa())
         private set
 
-    fun updateUiState(detailSiswa: DetailSiswa) {
-        uiStateSiswa = UIStateSiswa(
-            detailSiswa = detailSiswa,
-            isEntryValid = validasiInput(detailSiswa)
-        )
-    }
-
-    private fun validasiInput(detailSiswa: DetailSiswa): Boolean {
-        return with(detailSiswa) {
+    private fun validasiInput(uiState: DetailSiswa = uiStateSiswa.detailSiswa
+    ): Boolean {
+        return with(uiState) {
             nama.isNotBlank() && alamat.isNotBlank() && telpon.isNotBlank()
         }
     }
 
-    fun saveSiswa() {
-        if (validasiInput(uiStateSiswa.detailSiswa)) {
-            CoroutineScope(Dispatchers.IO).launch {
-                repositoriSiswa.insertSiswa(uiStateSiswa.detailSiswa.toSiswa())
-            }
+    fun updateUiState(detailSiswa: DetailSiswa) {
+        uiStateSiswa =
+            UIStateSiswa(detailSiswa = detailSiswa, isEntryValid =
+                validasiInput(detailSiswa))
+    }
+
+    suspend fun saveSiswa() {
+        if (validasiInput()) {
+            repositoriSiswa.insertSiswa(uiStateSiswa.detailSiswa.toSiswa())
         }
     }
 }
@@ -50,22 +44,24 @@ data class DetailSiswa(
     val telpon: String = ""
 )
 
-fun DetailSiswa.toSiswa(): Siswa = Siswa(
-    id = id,
-    nama = nama,
-    alamat = alamat,
-    telepon = telpon
-)
+fun DetailSiswa.toSiswa(): Siswa =
+    Siswa(
+        id = id,
+        nama = nama,
+        alamat = alamat,
+        telpon = telpon
+    )
+
+fun Siswa.toDetailSiswa(): DetailSiswa =
+    DetailSiswa(
+        id = id,
+        nama = nama,
+        alamat = alamat,
+        telpon = telpon
+    )
 
 fun Siswa.toUIStateSiswa(isEntryValid: Boolean = false): UIStateSiswa =
     UIStateSiswa(
         detailSiswa = this.toDetailSiswa(),
         isEntryValid = isEntryValid
-    )
-
-fun Siswa.toDetailSiswa(): DetailSiswa = DetailSiswa(
-    id = id,
-    nama = nama,
-    alamat = alamat,
-    telpon = telepon
-)
+       )
