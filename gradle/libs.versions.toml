@@ -9,9 +9,11 @@ lifecycleRuntimeKtx = "2.10.0"
 activityCompose = "1.12.0"
 composeBom = "2024.09.00"
 
-navigation = "2.9.5"
-lifecycle = "2.9.4"
-room = "2.4.8"
+
+navigation = "2.9.6"
+lifecycle = "2.10.0"
+
+room = "2.6.1"
 kspver = "2.0.21-1.0.26"
 
 
@@ -31,13 +33,17 @@ androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-
 androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 
-compose-icons = { module = "androidx.compose.material:material-icons-extended" }
+# ROOM → versi diperbaiki ke 2.6.1
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose",version = "2.10.0" }
-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose",version = "2.10.0" }
-navigation-compose = { module = "androidx.navigation:navigation-compose", version = "2.9.6" }
+
+# Lifecycle Compose
+lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
+lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
+
+# Navigation Compose
+navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
