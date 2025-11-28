@@ -12,7 +12,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class EntryViewModel(private val repositoriSiswa: RepositoriSiswa) : ViewModel() {
-    
+
     var uiStateSiswa by mutableStateOf(UIStateSiswa())
         private set
+
+    fun updateUiState(detailSiswa: DetailSiswa) {
+        uiStateSiswa = UIStateSiswa(
+            detailSiswa = detailSiswa,
+            isEntryValid = validasiInput(detailSiswa)
+        )
+    }
 
