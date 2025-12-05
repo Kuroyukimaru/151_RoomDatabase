@@ -1,3 +1,7 @@
 ![Belom ada Data](belombuatdata.png)
 ![Udah ada Data](udahadadata.png)
 ![Tampilan Tambah Siswa](untuknambahsiswa.png)
+![Halaman Detail siswa](halamandetail.png)
+![update Data](updatebaru.png)
+![Hasil Update](hasilupdate.png)
+![Pop Up Hapus](popuphapus.png)
