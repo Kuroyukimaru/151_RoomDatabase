@@ -56,6 +56,8 @@ dependencies {
     implementation(libs.lifecycle.runtime.compose)
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
+    implementation(libs.androidx.material3)
+    implementation(libs.material.icons.extended)
     ksp(libs.room.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
